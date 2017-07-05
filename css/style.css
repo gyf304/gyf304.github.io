@@ -46,6 +46,11 @@ footer.page-footer {
   font-size: 1rem;
 }
 
+.content img {
+  width: 100%;
+  max-width: 800px;
+}
+
 .cloak {
   display: none !important;
 }
