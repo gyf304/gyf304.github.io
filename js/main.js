@@ -143,7 +143,7 @@ blog.loadPostsInfo = function() {
   if (blog.content.posts && blog.content.posts.length > 0) {
     return (new Promise(function(resolve, reject){resolve()}));
   }
-  return axios.get('data/posts.json')
+  return axios.get('data/posts.json?time=' + (new Date()).getTime().toString())
   .then(function (response) {
     var placeholders = response.data;
     for (var i = 0; i < placeholders.length; i++) {
@@ -180,7 +180,7 @@ blog.loadPagesInfo = function() {
   if (blog.content.pages && blog.content.pages.length > 0) {
     return (new Promise(function(resolve, reject){resolve()}));
   }
-  return axios.get('data/pages.json')
+  return axios.get('data/pages.json?time=' + (new Date()).getTime().toString())
   .then(function (response) {
     var placeholders = response.data;
     for (var key in placeholders) {
