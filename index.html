@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>Yifan's babbling</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/spinner.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+<div id="app" class="cloak">
+  <navbar v-bind:title="config.title" v-bind:links="navLinks"></navbar>
+
+  <router-view></router-view>
+  <footer class="page-footer teal">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">About me</h5>
+          <p class="grey-text text-lighten-4">
+            CMU Undergrad.
+          </p>
+        </div>
+        <div class="col l6 s12">
+          <h5 class="white-text">Contact</h5>
+          <p class="grey-text text-lighten-4">
+            gyf304<span>@gmail.com</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<div id="app-placeholder">
+  <div class="spinner">
+    <div class="rect1"></div>
+    <div class="rect2"></div>
+    <div class="rect3"></div>
+    <div class="rect4"></div>
+    <div class="rect5"></div>
+  </div>
+</div>
+
+<script type="text/x-template" id="paged-posts-template">
+  <div class="container">
+    <div v-for="post in pagedPosts">
+      <transition name="fade">      
+        <post v-bind:title="post.title" v-bind:img="post.img" v-bind:date="post.date" v-bind:load="post.load" v-bind:html="post.html"></post>
+      </transition>
+    </div>
+    <ul class="pagination center-align">
+      <li v-for="pg in pagination" v-bind:class="{ active: (pg == parseInt($route.params.page)) }"><a v-on:click.prevent="changePage(pg)" href="#">{{pg}}</a></li>
+    </ul>
+  </div>
+</script>
+
+<script type="text/x-template" id="recent-posts-template">
+  <div class="container">
+    <div v-for="post in posts">
+      <post v-bind:title="post.title" v-bind:img="post.img" v-bind:date="post.date" v-bind:load="post.load" v-bind:html="post.html"></post>
+    </div>
+    <div class="section">
+      <div class="row">
+        <div class="col s12 center">
+          <a class="waves-effect waves-light btn" v-on:click.prevent="goToPagedPosts()" href="#">More Posts</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/x-template" id="post-template">
+  <div class="section">
+    <div class="row">
+      <div class="col s12 center">
+        <img v-if="img" class="responsive-img" v-bind:src="img" alt="Unsplashed background img 2">
+        <h3><i class="mdi-content-send brown-text"></i></h3>
+        <h3>{{title}}</h3>
+        <div class="right-align light">{{formattedDate}}</div>
+        <div v-if="html" class="left-align content" v-html="html"></div>
+        <div v-if="!html" class="left-align content">Loading</div>
+        <div class="left-align light">EOF</div>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/x-template" id="page-template">
+  <div class="container">
+    <div class="section">
+      <div class="row">
+        <div class="col s12 center">
+          <img v-if="img" class="responsive-img" v-bind:src="img" alt="Unsplashed background img 2">
+          <h3><i class="mdi-content-send brown-text"></i></h3>
+          <h3>{{title}}</h3>
+          <div class="right-align light">{{formattedDate}}</div>
+          <div v-if="html" class="left-align content" v-html="html"></div>
+          <div v-if="!html" class="left-align content">Loading</div>
+          <div class="left-align light">EOF</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/x-template" id="nav-template">
+  <div>
+    <div class="nav-shade" v-bind:class="{ active : active }" v-on:click="active = false"></div>
+    <nav class="white" role="navigation">
+      <div class="nav-wrapper container">
+        <a class="button-collapse show-on-large" href="#" v-on:click.prevent="active = true"><i class="material-icons">menu</i></a>
+        <a id="logo-container" class="brand-logo">{{title}}</a>
+      </div>
+    </nav>
+    <ul id="slide-out" class="side-nav" v-bind:class="{ active : active }">
+      <li v-for="link in links"><a class="waves-effect" v-on:click.prevent="link.action(); active = false">{{link.name}}</a></li>
+    </ul>
+  </div>
+</script>
+
+<!--  Scripts-->
+<script src="js/vue.js"></script>
+<script src="js/vue-router.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<!--<script src="js/materialize.min.js"></script>-->
+<script src="js/axios.js"></script>
+<script src="js/moment.min.js"></script>
+<script src="js/showdown.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

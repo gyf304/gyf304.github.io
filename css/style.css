@@ -1,0 +1,88 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+nav ul a,
+nav .brand-logo {
+  color: #444;
+}
+
+p {
+  line-height: 2rem;
+}
+
+.button-collapse {
+  color: #26a69a;
+}
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+  font-size: inherit;
+}
+
+footer.page-footer {
+  margin: 0;
+}
+
+.content h1 {
+  font-size: 2.28rem;
+  line-height: 110%;
+  margin: 1.14rem 0 0.912rem 0;
+}
+
+.content h2 {
+  font-size: 1.64rem;
+  line-height: 110%;
+  margin: 0.82rem 0 0.656rem 0;
+}
+
+.content h3,h4,h5,h6 {
+  font-size: 1rem;
+}
+
+.cloak {
+  display: none !important;
+}
+
+.side-nav{
+  transition: 0.5s;
+  z-index: 500;
+}
+
+.side-nav.active {
+  transform: translateX(0px);
+}
+
+.nav-shade {
+  visibility: hidden;
+  background-color: black;
+  opacity: 0;
+  z-index: 300;
+  position: fixed !important;
+  height: 100%;
+  width: 100%;
+  transition: 0.5s;
+}
+
+@keyframes appear {
+  0% {
+    display: block;
+    opacity: 0;
+  }
+  100% {
+    display: block;
+    opacity: 0.5;
+  }
+}
+
+.nav-shade.active {
+  visibility: visible;
+  opacity: 0.5;
+}
+
