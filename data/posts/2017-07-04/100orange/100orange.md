@@ -1,6 +1,6 @@
 Full title:
 
-# Hacking 100% Orange Juice to open multiple instance of the game.
+# Hacking 100% Orange Juice to open multiple instances of the game.
 
 I recently got the game 100% Orange Juice, and as a board game it doesn't support local multiplayer. It does have a online multiplayer though. So the idea is to run multiple instances of the game, and use the online multiplayer mode to "simulate" local multiplayer. However, it doesn't event want to you to run multiple instances. That's a bummer.
 
