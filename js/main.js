@@ -69,7 +69,9 @@ blog.components.recentPosts = {
     data: function() { return { rawPosts: blog.content.posts }; },
     computed: {
       posts: function() {
-        return this.rawPosts.slice(this.rawPosts.length - blog.config.postsRecentSize).reverse();
+        var recentIdx = this.rawPosts.length - blog.config.postsRecentSize;
+        if (recentIdx < 0) recentIdx = 0;
+        return this.rawPosts.slice(recentIdx).reverse();
       }
     },
     methods: {
