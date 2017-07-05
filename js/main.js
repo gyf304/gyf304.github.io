@@ -155,7 +155,7 @@ blog.loadPostsInfo = function() {
           var postType = postUrl.substring(postUrl.lastIndexOf(".")+1);
           var postParser = blog.parsers[postType];
           if (typeof postParser === "function") {
-            axios.get(postUrl, {responseType: 'text'})
+            axios.get(postUrl  + '?time=' + (new Date()).getTime().toString(), {responseType: 'text'})
             .then(function(response){
               var str = response.data;
               var r = postParser(response.data);
@@ -193,7 +193,7 @@ blog.loadPagesInfo = function() {
             var postType = postUrl.substring(postUrl.lastIndexOf(".")+1);
             var postParser = blog.parsers[postType];
             if (typeof postParser === "function") {
-              axios.get(postUrl, {responseType: 'text'})
+              axios.get(postUrl + '?time=' + (new Date()).getTime().toString(), {responseType: 'text'})
               .then(function(response){
                 var str = response.data;
                 var r = postParser(response.data);
