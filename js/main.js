@@ -235,8 +235,8 @@ blog.loadPostsInfo()
       navbar: blog.components.navbar
     }
   });
-  $('#app').removeClass('cloak');
-  $('#app-placeholder').addClass('cloak');
+  document.getElementById('app').className = '';
+  document.getElementById('app-placeholder').className = 'cloak';
 });
 
 
