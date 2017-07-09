@@ -4,13 +4,9 @@ var blog = {
   content: {}
 };
 
-blog.config = {
-  title: "Yifan's Blog",
-  pageStartIndex: 1,
-  postsRecentSize: 3,
-  postsPageSize: 5,
-  postsPaginationLimit: 5
-};
+blog.config = BLOG_CONFIG;
+
+blog.parsers = BLOG_PARSERS;
 
 blog.components.navbar = {
   template: '#nav-template',
@@ -130,14 +126,6 @@ blog.router.switch = function(path, onComplete, onAbort) {
     if (typeof onComplete === "function") onComplete();
   }, onAbort);
 }
-
-blog.parsers = {
-  md: function(str) {
-    var converter = new showdown.Converter({noHeaderId: true});
-    var result = converter.makeHtml(str);
-    return result;
-  }
-};
 
 blog.loadPostsInfo = function() {
   if (blog.content.posts && blog.content.posts.length > 0) {
