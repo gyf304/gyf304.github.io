@@ -15,9 +15,9 @@ blog.components.navbar = {
   data: function() { return {'active': false} }
 };
 
-blog.components.post = {
-  template: '#post-template',
-  name: 'post',
+blog.components.article = {
+  template: '#article-template',
+  name: 'blog-article',
   props: ['title', 'img', 'date', 'html', 'load'],
   computed: {
     formattedDate: function() {
@@ -54,10 +54,10 @@ blog.components.pagedPosts = {
     },
     methods: {
       changePage: function(page) {
-        this.$router.switch('/posts/page-' + page);
+        this.$router.switch('/posts/page/' + page);
       }
     },
-    components: { post: blog.components.post }
+    components: { 'blog-article': blog.components.article }
 };
 
 blog.components.recentPosts = {
@@ -73,11 +73,11 @@ blog.components.recentPosts = {
     methods: {
       goToPagedPosts: function(page) {
         var pages = Math.ceil(this.rawPosts.length / blog.config.postsPageSize);
-        this.$router.switch('/posts/page-' + (pages - 1 + blog.config.pageStartIndex));
+        this.$router.switch('/posts/page/' + (pages - 1 + blog.config.pageStartIndex));
       }
     },
     created: function() {},
-    components: { post: blog.components.post }
+    components: { 'blog-article': blog.components.article }
 };
 
 blog.components.page = {
@@ -90,6 +90,7 @@ blog.components.page = {
       page = {
         title: "Not found",
         img: null,
+        date: '2000-00-00',
         content: "",
         html: "Oops, nothing is here...",
         load: function() {}
@@ -97,17 +98,11 @@ blog.components.page = {
     }
     return page;
   },
-  computed: {
-    formattedDate: function() {
-      return moment(this.date, 'YYYY-MM-DD').format('ddd, MMM DD YYYY');
-    }
-  },
-  created: function(){ this.load(); },
-  updated: function(){ this.load(); }
+  components: { 'blog-article': blog.components.article }
 }
 
 blog.routes = [
-  { path: '/posts/page-:page', component: blog.components.pagedPosts, props: true },
+  { path: '/posts/page/:page', component: blog.components.pagedPosts, props: true },
   { path: '/posts/recent', component: blog.components.recentPosts },
   { path: '/pages/:id', component: blog.components.page, props: true },
   { path: '*', redirect: '/posts/recent' }
@@ -122,7 +117,8 @@ blog.router = new VueRouter({
 
 blog.router.switch = function(path, onComplete, onAbort) {
   blog.router.push(path, function(){
-    $('html, body').animate({ scrollTop: 0 }, 'fast');
+    //$('html, body').animate({ scrollTop: 0 }, 'fast');
+    window && window.scroll(0,0);
     if (typeof onComplete === "function") onComplete();
   }, onAbort);
 }
