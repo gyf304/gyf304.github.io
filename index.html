@@ -14,7 +14,6 @@
 <body>
 <div id="app" class="cloak">
   <navbar v-bind:title="config.title" v-bind:links="navLinks"></navbar>
-
   <router-view></router-view>
   <footer class="page-footer teal">
     <div class="container">
@@ -53,11 +52,7 @@
 
 <script type="text/x-template" id="paged-posts-template">
   <div class="container">
-    <div v-for="post in pagedPosts">
-      <transition name="fade">      
-        <blog-article v-bind:title="post.title" v-bind:img="post.img" v-bind:date="post.date" v-bind:load="post.load" v-bind:html="post.html"></blog-article>
-      </transition>
-    </div>
+    <article-list v-bind:posts="pagedPosts"></article-list>
     <ul class="pagination center-align">
       <li v-for="pg in pagination" v-bind:class="{ active: (pg == parseInt($route.params.page)) }"><a v-on:click.prevent="changePage(pg)" href="#">{{pg}}</a></li>
     </ul>
@@ -66,9 +61,7 @@
 
 <script type="text/x-template" id="recent-posts-template">
   <div class="container">
-    <div v-for="post in posts">
-      <blog-article v-bind:title="post.title" v-bind:img="post.img" v-bind:date="post.date" v-bind:load="post.load" v-bind:html="post.html"></blog-article>
-    </div>
+    <article-list v-bind:posts="posts"></article-list>
     <div class="section">
       <div class="row">
         <div class="col s12 center">
@@ -101,13 +94,27 @@
   </div>
 </script>
 
+<script type="text/x-template" id="post-template">
+  <div class="container">
+    <blog-article v-bind:title="title" v-bind:img="img" v-bind:date="date" v-bind:load="load" v-bind:html="html"></blog-article>
+  </div>
+</script>
+
+<script type="text/x-template" id="article-list-template">
+  <div>
+    <div v-for="post in posts">     
+      <blog-article v-bind:title="post.title" v-bind:img="post.img" v-bind:date="post.date" v-bind:load="post.load" v-bind:html="post.html"></blog-article>
+    </div>
+  </div>
+</script>
+
 <script type="text/x-template" id="nav-template">
   <div>
     <div class="nav-shade" v-bind:class="{ active : active }" v-on:click="active = false"></div>
     <nav class="white" role="navigation">
       <div class="nav-wrapper container">
         <a class="button-collapse show-on-large" href="#" v-on:click.prevent="active = true"><i class="material-icons">menu</i></a>
-        <a id="logo-container" class="brand-logo">{{title}}</a>
+        <a id="logo-container" class="brand-logo" href="/">{{title}}</a>
       </div>
     </nav>
     <ul id="slide-out" class="side-nav" v-bind:class="{ active : active }">
@@ -125,6 +132,7 @@
 <script src="js/showdown.js"></script>
 <script src="js/config.js"></script>
 <script src="js/parsers.js"></script>
+<script src="js/utils.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

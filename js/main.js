@@ -8,6 +8,15 @@ blog.config = BLOG_CONFIG;
 
 blog.parsers = BLOG_PARSERS;
 
+blog.content.notfound = {
+  title: "Not found",
+  img: null,
+  date: '2000-00-00',
+  content: "",
+  html: "Oops, nothing is here...",
+  load: function() {}
+}
+
 blog.components.navbar = {
   template: '#nav-template',
   name: 'navbar',
@@ -26,6 +35,13 @@ blog.components.article = {
   },
   created: function(){ this.load(); },
   updated: function(){ this.load(); }
+};
+
+blog.components.articleList = {
+  template: '#article-list-template',
+  name: 'article-list',
+  props: ['posts'],
+  components: {'blog-article': blog.components.article}
 };
 
 blog.components.pagedPosts = {
@@ -57,7 +73,7 @@ blog.components.pagedPosts = {
         this.$router.switch('/posts/page/' + page);
       }
     },
-    components: { 'blog-article': blog.components.article }
+    components: { 'article-list': blog.components.articleList }
 };
 
 blog.components.recentPosts = {
@@ -77,7 +93,7 @@ blog.components.recentPosts = {
       }
     },
     created: function() {},
-    components: { 'blog-article': blog.components.article }
+    components: { 'article-list': blog.components.articleList }
 };
 
 blog.components.page = {
@@ -87,16 +103,26 @@ blog.components.page = {
   data: function() {
     var page = blog.content.pages[this.id];
     if (!page) {
-      page = {
-        title: "Not found",
-        img: null,
-        date: '2000-00-00',
-        content: "",
-        html: "Oops, nothing is here...",
-        load: function() {}
-      }
+      return blog.content.notfound;
     }
     return page;
+  },
+  components: { 'blog-article': blog.components.article }
+}
+
+blog.components.post = {
+  template: '#post-template',
+  name: 'post',
+  props: ['urldate', 'urltitle'],
+  data: function() {
+    var self = this;
+    console.log(self.urldate);
+    console.log(self.urltitle);
+    var candidates = blog.content.posts.filter(function(e){return (e.date == self.urldate && BLOG_UTILS.strip(e.title) == self.urltitle)});
+    if (candidates.length == 0) {
+      return blog.content.notfound;
+    }
+    return candidates[0];
   },
   components: { 'blog-article': blog.components.article }
 }
@@ -104,6 +130,7 @@ blog.components.page = {
 blog.routes = [
   { path: '/posts/page/:page', component: blog.components.pagedPosts, props: true },
   { path: '/posts/recent', component: blog.components.recentPosts },
+  { path: '/posts/date/:urldate/:urltitle', component: blog.components.post, props: true },
   { path: '/pages/:id', component: blog.components.page, props: true },
   { path: '*', redirect: '/posts/recent' }
 ];
