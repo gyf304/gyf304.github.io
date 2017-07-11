@@ -19,7 +19,7 @@ blog.loadPostsInfo()
     data: {post: post},
     methods: {
       toUrl: function(article){
-        return blog.config.root + '#/posts/' + article.date + '/' + blog.utils.strip(article.title);
+        return blog.utils.toParamPath('/posts/' + article.date + '/' + blog.utils.strip(article.title));
       }
     }
   });

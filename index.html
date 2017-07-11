@@ -57,20 +57,42 @@
 
 <script type="text/x-template" id="paged-posts-template">
   <div class="container">
-    <article-list v-bind:posts="pagedPosts"></article-list>
+    <div v-for="post in pagedPosts">
+      <div class="fold">
+        <blog-article v-bind:title="post.title" v-bind:img="post.img" v-bind:date="post.date" v-bind:load="post.load" v-bind:html="post.html"></blog-article>
+      </div>
+      <div class="section">
+        <div class="row">
+          <div class="col s12 center">
+            <a class="waves-effect waves-light btn-flat" v-on:click.prevent="$router.switch(getPath(post))" v-bind:href="toParamPath(getPath(post))">Read more / Comments</a>
+          </div>
+        </div>
+      </div>
+    </div>
     <ul class="pagination center-align">
-      <li v-for="pg in pagination" v-bind:class="{ active: (pg == parseInt($route.params.page)) }"><a v-on:click.prevent="changePage(pg)" href="#">{{pg}}</a></li>
+      <li v-for="pg in pagination" v-bind:class="{ active: (pg == parseInt($route.params.page)) }"><a v-on:click.prevent="$router.switch(getPagePath(pg))" href="#">{{pg}}</a></li>
     </ul>
   </div>
 </script>
 
 <script type="text/x-template" id="recent-posts-template">
   <div class="container">
-    <article-list v-bind:posts="posts"></article-list>
+    <div v-for="post in posts">
+      <div class="fold">
+        <blog-article v-bind:title="post.title" v-bind:img="post.img" v-bind:date="post.date" v-bind:load="post.load" v-bind:html="post.html"></blog-article>
+      </div>
+      <div class="section">
+        <div class="row">
+          <div class="col s12 center">
+            <a class="waves-effect waves-light btn-flat" v-on:click.prevent="$router.switch(getPath(post))" v-bind:href="toParamPath(getPath(post))">Read more / Comments</a>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="section">
       <div class="row">
         <div class="col s12 center">
-          <a class="waves-effect waves-light btn" v-on:click.prevent="goToPagedPosts()" href="#">More Posts</a>
+          <a class="waves-effect waves-light btn" v-on:click.prevent="$router.switch(pagedPostsPath)" v-bind:href="toParamPath(pagedPostsPath)">More Posts</a>
         </div>
       </div>
     </div>
@@ -95,22 +117,19 @@
 
 <script type="text/x-template" id="page-template">
   <div class="container">
-    <blog-article v-bind:title="title" v-bind:img="img" v-bind:date="date" v-bind:load="load" v-bind:html="html"></blog-article>
+    <blog-article v-bind:title="page.title" v-bind:img="page.img" v-bind:date="page.date" v-bind:load="page.load" v-bind:html="page.html"></blog-article>
   </div>
 </script>
 
 <script type="text/x-template" id="post-template">
   <div class="container">
-    <blog-article v-bind:title="title" v-bind:img="img" v-bind:date="date" v-bind:load="load" v-bind:html="html"></blog-article>
+    <blog-article v-bind:title="post.title" v-bind:img="post.img" v-bind:date="post.date" v-bind:load="post.load" v-bind:html="post.html"></blog-article>
+    <blog-comment v-bind:title="post.title" v-bind:url="postUrl" v-bind:name="name" v-bind:id="postId"></blog-comment>
   </div>
 </script>
 
-<script type="text/x-template" id="article-list-template">
-  <div>
-    <div v-for="post in posts">     
-      <blog-article v-bind:title="post.title" v-bind:img="post.img" v-bind:date="post.date" v-bind:load="post.load" v-bind:html="post.html"></blog-article>
-    </div>
-  </div>
+<script type="text/x-template" id="comment-template">
+  <iframe ref="iframe" allowtransparency="true" frameborder="0" sandbox="allow-same-origin allow-forms allow-scripts" scrolling="no" v-bind:src="commentUrl" v-bind:style="'overflow:hidden;width:100%;height:' + height + 'px'"></iframe>
 </script>
 
 <script type="text/x-template" id="nav-template">
@@ -129,6 +148,7 @@
 </script>
 
 <!--  Scripts-->
+<script src="js/preload.js"></script>
 <script src="3rdparty/js/vue.js"></script>
 <script src="3rdparty/js/vue-router.js"></script>
 <!--<script src="js/materialize.min.js"></script>-->

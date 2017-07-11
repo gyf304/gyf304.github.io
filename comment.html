@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>Yifan's Blog Comment</title>
+</head>
+<body>
+<div id="disqus_thread"></div>
+<script>
+function getUrlParams() {
+  var params = {};
+  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&#]*)/gi,
+    function(m,key,value) {
+      params[key] = value;
+  });
+  return params;
+}
+var params = getUrlParams();
+this.page = {};
+this.page.url = decodeURIComponent(params.url);
+this.page.identifier = decodeURIComponent(params.id);
+this.page.title = decodeURIComponent(params.title);
+var name = decodeURIComponent(params.name);
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://' + name + '.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</body>
+</html>

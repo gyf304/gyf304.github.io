@@ -34,6 +34,9 @@ var blog = {
           params[key] = value;
       });
       return params;
+    },
+    toParamPath: function(path) {
+      return blog.config.root + '?path=' + encodeURIComponent(path);
     }
   }
 

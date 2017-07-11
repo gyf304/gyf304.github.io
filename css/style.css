@@ -90,3 +90,8 @@ footer.page-footer {
   opacity: 0.5;
 }
 
+.fold {
+  max-height: 40em;
+  overflow: hidden;
+}
+

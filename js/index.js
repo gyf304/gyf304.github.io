@@ -8,6 +8,32 @@ blog.view.components.navbar = {
   data: function() { return {'active': false} }
 };
 
+blog.view.components.comment = {
+  template: '#comment-template',
+  name: 'blog-comment',
+  props: ['id', 'url', 'title', 'name'],
+  data: function(){
+    return {height: 0};
+  },
+  computed: {
+    commentUrl: function() {
+      return blog.config.root + 'comment.html' + '?id=' + encodeURIComponent(this.id) + '&url=' + encodeURIComponent(this.url) + '&title=' + encodeURIComponent(this.title) + '&name=' + encodeURIComponent(this.name);
+    }
+  },
+  created: function() {
+    var self = this;
+    console.log('init');
+    self.timerId = setInterval(function(){ 
+      try{
+        self.height = (self.$refs['iframe']).contentWindow.document.body.scrollHeight; 
+      } catch(e) {}
+    }, 500);
+  },
+  destroyed: function() {
+    clearInterval(this.timerId);
+  }
+};
+
 blog.view.components.article = {
   template: '#article-template',
   name: 'blog-article',
@@ -53,16 +79,23 @@ blog.view.components.pagedPosts = {
       }
     },
     methods: {
-      changePage: function(page) {
-        this.$router.switch('/posts/page/' + page);
-      }
+      getPagePath: function(page) {
+        return '/posts/page/' + page;
+      },
+      getPath: function(post) {
+        return '/posts/' + post.date + '/' + blog.utils.strip(post.title);
+      },
+      toParamPath: blog.utils.toParamPath
     },
-    components: { 'article-list': blog.view.components.articleList }
+    components: { 'blog-article': blog.view.components.article }
 };
 
 blog.view.components.recentPosts = {
   template: '#recent-posts-template',
-    data: function() { return { rawPosts: blog.content.posts }; },
+    data: function() { return { 
+      rawPosts: blog.content.posts,
+      pagedPostsPath: '/posts/page/' + (Math.ceil(blog.content.posts.length / blog.config.postsPageSize) - 1 + blog.config.pageStartIndex)
+    }; },
     computed: {
       posts: function() {
         var recentIdx = this.rawPosts.length - blog.config.postsRecentSize;
@@ -71,13 +104,13 @@ blog.view.components.recentPosts = {
       }
     },
     methods: {
-      goToPagedPosts: function(page) {
-        var pages = Math.ceil(this.rawPosts.length / blog.config.postsPageSize);
-        this.$router.switch('/posts/page/' + (pages - 1 + blog.config.pageStartIndex));
-      }
+      getPath: function(post) {
+        return '/posts/' + post.date + '/' + blog.utils.strip(post.title);
+      },
+      toParamPath: blog.utils.toParamPath
     },
     created: function() {},
-    components: { 'article-list': blog.view.components.articleList }
+    components: { 'blog-article': blog.view.components.article }
 };
 
 blog.view.components.page = {
@@ -87,9 +120,9 @@ blog.view.components.page = {
   data: function() {
     var page = blog.content.pages[this.urlid];
     if (!page) {
-      return blog.content.notfound;
+      return {page: blog.content.notfound};
     }
-    return page;
+    return {page: page};
   },
   components: { 'blog-article': blog.view.components.article }
 }
@@ -102,12 +135,18 @@ blog.view.components.post = {
     var self = this;
     var candidates = blog.content.posts.filter(function(e){return (e.date == self.urldate && blog.utils.strip(e.title) == self.urltitle)});
     if (candidates.length == 0) {
-      return blog.content.notfound;
+      return {post: blog.content.notfound};
     }
-    return candidates[0];
+    return {post: candidates[0], 
+      name: blog.config.disqusShortname, 
+      postUrl: blog.config.site + blog.config.root + '#!/posts/' + self.urldate + '/' + self.urltitle,
+      postId: 'post-' + self.urldate + '-' + self.urltitle
+    };
   },
-  components: { 'blog-article': blog.view.components.article }
+  components: { 'blog-article': blog.view.components.article, 'blog-comment': blog.view.components.comment }
 }
+
+
 
 blog.routes = [
   { path: '/posts/page/:page', component: blog.view.components.pagedPosts, props: true },

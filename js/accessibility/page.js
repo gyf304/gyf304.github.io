@@ -18,7 +18,7 @@ blog.loadPagesInfo()
     data: {page: page},
     methods: {
       toUrl: function(article){
-        return blog.config.root + '#/pages/' + article.id;
+        return blog.utils.toParamPath('/pages/' + article.id);
       }
     }
   });
