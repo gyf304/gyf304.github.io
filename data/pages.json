@@ -3,6 +3,6 @@
         "title": "About This Blog",
         "date": "2017-06-05",
         "img": null,
-        "content": "data/pages/helloworld.md"
+        "content": "pages/helloworld.md"
     }
 }

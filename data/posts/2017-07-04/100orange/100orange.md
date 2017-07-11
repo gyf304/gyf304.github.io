@@ -6,7 +6,7 @@ I recently got the game 100% Orange Juice, and as a board game it doesn't suppor
 
 So I open up the trusty OllyDbg and trace the startup of the game. 15 minutes later I found that "Game is already running" check is performed at offset 0x00B31033, almost at the very beginning of the exe. Based on the result, at 0x00B3103B, the program either jumps to 0x00B31056 to continue execution, or gives you an error message and crash. We certainly don't want the latter.
 
-![img1](data/posts/2017-07-04/100orange/img1.jpg)
+![img1](img1.jpg)
 
 The operation at 0x00B3103B is JE SHORT 00B31056 (74 19), simply change that to JMP SHORT 00B31056 (EB 19) and it is fixed.
 

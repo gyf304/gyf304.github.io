@@ -7,13 +7,13 @@
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/spinner.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="3rdparty/css/spinner.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="3rdparty/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
 <div id="app" class="cloak">
-  <navbar v-bind:title="config.title" v-bind:links="navLinks"></navbar>
+  <navbar v-bind:title="title" v-bind:links="navLinks"></navbar>
   <router-view></router-view>
   <footer class="page-footer teal">
     <div class="container">
@@ -124,15 +124,15 @@
 </script>
 
 <!--  Scripts-->
-<script src="js/vue.js"></script>
-<script src="js/vue-router.js"></script>
+<script src="3rdparty/js/vue.js"></script>
+<script src="3rdparty/js/vue-router.js"></script>
 <!--<script src="js/materialize.min.js"></script>-->
-<script src="js/axios.js"></script>
-<script src="js/moment.min.js"></script>
-<script src="js/showdown.js"></script>
+<script src="3rdparty/js/axios.js"></script>
+<script src="3rdparty/js/moment.min.js"></script>
+<script src="3rdparty/js/showdown.js"></script>
 <script src="js/config.js"></script>
-<script src="js/parsers.js"></script>
 <script src="js/utils.js"></script>
-<script src="js/main.js"></script>
+<script src="js/blog.js"></script>
+<script src="js/index.js"></script>
 </body>
 </html>
