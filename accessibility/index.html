@@ -10,7 +10,7 @@
     <h1>Pages</h1>
     <div id="pages">
       <div v-for="page in pages">
-        <p>{{page.title}}</p>
+        <a v-bind:href="toPageUrl(page)">{{page.title}}</a>
       </div>
     </div>
     <h1>Posts</h1>

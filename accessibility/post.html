@@ -7,6 +7,7 @@
 <body>
   <div id="app">
     <h1>{{post.title}}</h1>
+    <a v-bind:href="toUrl(post)">View HTML5 version.</a>
     <div v-html="post.html">
     </div>
   </div>

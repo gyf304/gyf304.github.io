@@ -11,6 +11,9 @@ blog.loadPostsInfo()
     methods: {
       toPostUrl: function(article){
         return 'post.html?date=' + article.date + '&title=' + blog.utils.strip(article.title);
+      },
+      toPageUrl: function(article){
+        return 'page.html?id=' + article.id;
       }
     }
   });

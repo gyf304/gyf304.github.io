@@ -83,9 +83,9 @@ blog.view.components.recentPosts = {
 blog.view.components.page = {
   template: '#page-template',
   name: 'page',
-  props: ['id'],
+  props: ['urlid'],
   data: function() {
-    var page = blog.content.pages[this.id];
+    var page = blog.content.pages[this.urlid];
     if (!page) {
       return blog.content.notfound;
     }
@@ -112,8 +112,8 @@ blog.view.components.post = {
 blog.routes = [
   { path: '/posts/page/:page', component: blog.view.components.pagedPosts, props: true },
   { path: '/posts/recent', component: blog.view.components.recentPosts },
-  { path: '/posts/date/:urldate/:urltitle', component: blog.view.components.post, props: true },
-  { path: '/pages/:id', component: blog.view.components.page, props: true },
+  { path: '/posts/:urldate/:urltitle', component: blog.view.components.post, props: true },
+  { path: '/pages/:urlid', component: blog.view.components.page, props: true },
   { path: '*', redirect: '/posts/recent' }
 ];
 

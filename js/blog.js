@@ -26,6 +26,14 @@ var blog = {
     },
     convertToAbsUrl: function (baseUrl, relUrl) {
       return relUrl.replace(/^((?!\w*?:\/\/|\/).*?)$/g, baseUrl + '$1');
+    },
+    getUrlParams: function() {
+      var params = {};
+      var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+      function(m,key,value) {
+          params[key] = value;
+      });
+      return params;
     }
   }
 
@@ -83,6 +91,7 @@ var blog = {
         if (placeholders.hasOwnProperty(key)) {
           var p = placeholders[key];
           if (!p.hasOwnProperty('html')) p.html = '';
+          p.id = key;
           initArticleLoader(p);
         }
       }

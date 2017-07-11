@@ -1,15 +1,6 @@
 (function(){
 
-function getUrlParams() {
-  var params = {};
-  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
-  function(m,key,value) {
-      params[key] = value;
-  });
-  return params;
-}
-
-var params = getUrlParams();
+var params = blog.utils.getUrlParams();
 var post = {title: 'Not Found', html: ''};
 
 blog.view = {};
@@ -27,8 +18,8 @@ blog.loadPostsInfo()
     el: '#app',
     data: {post: post},
     methods: {
-      toPostUrl: function(article){
-        return 'post.html?date=' + article.date + '&title=' + blog.utils.strip(article.title);
+      toUrl: function(article){
+        return blog.config.root + '#/posts/' + article.date + '/' + blog.utils.strip(article.title);
       }
     }
   });
