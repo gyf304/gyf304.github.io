@@ -10,5 +10,11 @@
         "date": "2017-07-04",
         "img": null,
         "content": "posts/2017-07-04/100orange/100orange.md"
+    },
+    {
+        "title": "Fixing & improving the blog",
+        "date": "2017-07-11",
+        "img": null,
+        "content": "posts/2017-07-11/blog.md"
     }
 ]

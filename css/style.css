@@ -95,3 +95,11 @@ footer.page-footer {
   overflow: hidden;
 }
 
+.content ul li {
+  list-style-type: circle;
+}
+
+div.content ul {
+  padding-left: 2em;
+}
+
