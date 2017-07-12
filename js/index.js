@@ -210,6 +210,3 @@ blog.loadPostsInfo()
   document.getElementById('app').className = '';
   document.getElementById('app-placeholder').className = 'cloak';
 });
-
-
-

@@ -4,7 +4,7 @@ So the device is here... But it is not what I wanted...
 
 ![img1](hdmi1.jpg)
 
-Apparantly there are two types of this device on eBay that look identical, one with a microUSB port, one without. I, of course, accidentally bought the one without the microUSB port. So what is missing from the non-microUSB version? I suspect that if I can figure out the parts missing from the board and fill these in, I might add the missing USB-to-PC functionality I am looking for. The only way to find out is to open it up.
+Apparently there are two types of this device on eBay that look identical, one with a microUSB port, one without. I, of course, accidentally bought the one without the microUSB port. So what is missing from the non-microUSB version? I suspect that if I can figure out the parts missing from the board and fill these in, I might add the missing USB-to-PC functionality I am looking for. The only way to find out is to open it up.
 
 ![img2](hdmi2.jpg)
 
