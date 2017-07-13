@@ -16,10 +16,11 @@ function getUrlParams() {
   return params;
 }
 var params = getUrlParams();
-this.page = {};
-this.page.url = decodeURIComponent(params.url);
-this.page.identifier = decodeURIComponent(params.id);
-this.page.title = decodeURIComponent(params.title);
+var disqus_config = function () {
+  this.page.url = decodeURIComponent(params.url);
+  this.page.identifier = decodeURIComponent(params.id);
+  this.page.title = decodeURIComponent(params.title);
+}
 var name = decodeURIComponent(params.name);
 (function() { // DON'T EDIT BELOW THIS LINE
 var d = document, s = d.createElement('script');
