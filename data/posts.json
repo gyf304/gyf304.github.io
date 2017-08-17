@@ -16,5 +16,11 @@
         "date": "2017-07-11",
         "img": null,
         "content": "posts/2017-07-11/blog.md"
+    },
+    {
+        "title": "The Making of the Library Occupancy Estimation System, Part 1 - the Idea",
+        "date": "2017-08-16",
+        "img": null,
+        "content": "posts/2017-08-16/occupancy.md"
     }
 ]
