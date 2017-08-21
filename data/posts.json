@@ -22,5 +22,11 @@
         "date": "2017-08-16",
         "img": null,
         "content": "posts/2017-08-16/occupancy.md"
+    },
+    {
+        "title": "The Making of the Library Occupancy Estimation System, Part 2 - the Sniffer",
+        "date": "2017-08-19",
+        "img": null,
+        "content": "posts/2017-08-19/occupancy2.md"
     }
 ]
