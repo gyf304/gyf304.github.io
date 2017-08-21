@@ -6,4 +6,4 @@ The other problem was (in my opinion) more important: Data need to be encrypted 
 
 I wrote a few wrappers around the original APIs to abstract things a bit and to make life easier. Original SDK requires you to do almost everything manually (WiFi connection management, DNS lookup, etc.), so it is nice to separate core logic from supporting code - currently `user_main.c` is less than 200 SLOC while the entire repository is around 1300 SLOC. Dumping 1300 lines into a single file would be a disaster.
 
-[Sniffer Code on Github](https://github.com/gyf304/wifisniffer)
+[Sniffer Code on GitHub](https://github.com/gyf304/wifisniffer)
