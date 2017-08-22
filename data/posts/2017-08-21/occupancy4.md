@@ -9,7 +9,7 @@ A few hours later:
 
 The front-end is pretty bare-bones (< 100 SLOC of js), but it does the job. And thanks to MaterializeCSS, it doesn't look half bad. The page is also responsive (again, thank you MaterializeCSS).
 
-The front-end already looks pretty nice on phones, so I took a step further to make it an iOS Web App (no I don't want to pay $99/year to be an Apple Developer to make it an actual iOS App).
+The front-end already looks pretty nice on phones, so I took a step further to make it an iOS Web App (no I don't want to pay $99/year to make it an actual iOS App).
 
 The first thing to do when developing a mobile app is of course to design an app icon.
 
