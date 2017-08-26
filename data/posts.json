@@ -40,5 +40,11 @@
         "date": "2017-08-21",
         "img": null,
         "content": "posts/2017-08-21/occupancy4.md"
+    },
+    {
+        "title": "Color Management - Trivial but Important",
+        "date": "2017-08-25",
+        "img": null,
+        "content": "posts/2017-08-25/color.md"
     }
 ]
