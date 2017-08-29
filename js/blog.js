@@ -22,7 +22,7 @@ var blog = {
 
   blog.utils = {
     strip: function(str) {
-      return str.replace(/ /g, '-').replace(/[^a-zA-Z0-9\-]/g, '').toLowerCase();
+      return str.replace(/\s/g, '-').replace(/[^a-zA-Z0-9\-]/g, '').replace(/\-+/g, '-').toLowerCase();
     },
     convertToAbsUrl: function (baseUrl, relUrl) {
       return relUrl.replace(/^((?!\w*?:\/\/|\/).*?)$/g, baseUrl + '$1');
