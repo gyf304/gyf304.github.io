@@ -52,5 +52,11 @@
         "date": "2017-08-28",
         "img": null,
         "content": "posts/2017-08-28/enclosure.md"
+    },
+    {
+        "title": "Fixing DjVu eBooks with Problematic Page Sizes",
+        "date": "2017-08-30",
+        "img": null,
+        "content": "posts/2017-08-30/djvu.md"
     }
 ]
