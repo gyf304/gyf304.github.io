@@ -4,5 +4,11 @@
         "date": "2017-06-05",
         "img": null,
         "content": "pages/helloworld.md"
+    },
+    "about-me": {
+        "title": "About Me",
+        "date": "2017-09-07",
+        "img": null,
+        "content": "pages/resume.md"
     }
 }
