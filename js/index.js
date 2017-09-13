@@ -195,7 +195,7 @@ blog.loadPostsInfo()
             var e = blog.content.pages[key];
             var link = {
               name: e.title,
-              action: function(){blog.view.router.switch('/pages/' + e.id.toString())}
+              action: (function(id){return function(){blog.view.router.switch('/pages/' + id)}})(key)
             };
             links.push(link);
           }
