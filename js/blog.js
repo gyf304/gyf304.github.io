@@ -94,7 +94,7 @@ var blog = {
         if (placeholders.hasOwnProperty(key)) {
           var p = placeholders[key];
           if (!p.hasOwnProperty('html')) p.html = '';
-          p.id = key;
+          p.id = key.toString();
           initArticleLoader(p);
         }
       }
