@@ -42,7 +42,8 @@ blog.view.components.article = {
       return moment(this.date, 'YYYY-MM-DD').format('ddd, MMM DD YYYY');
     }
   },
-  created: function(){ this.load(); }
+  created: function(){ this.load(); },
+  updated: function(){ this.load(); }
 };
 
 blog.view.components.articleList = {
