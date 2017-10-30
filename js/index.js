@@ -43,7 +43,11 @@ blog.view.components.article = {
     }
   },
   created: function(){ this.load(); },
-  updated: function(){ this.load(); }
+  watch: {
+    load: function (to, from) {
+      this.load();
+    }
+  },
 };
 
 blog.view.components.articleList = {
@@ -124,7 +128,6 @@ blog.view.components.page = {
         return;
       }
       this.page = page;
-      page.load();
       return;
     }
   },
@@ -132,8 +135,6 @@ blog.view.components.page = {
   components: { 'blog-article': blog.view.components.article },
   watch: {
     '$route': function (to, from) {
-      console.log(to);
-      console.log(this.urlid);
       this.update();
     }
   },
