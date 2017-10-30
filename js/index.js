@@ -22,7 +22,6 @@ blog.view.components.comment = {
   },
   created: function() {
     var self = this;
-    console.log('init');
     self.timerId = setInterval(function(){ 
       try{
         self.height = (self.$refs['iframe']).contentWindow.document.body.scrollHeight; 
@@ -43,8 +42,7 @@ blog.view.components.article = {
       return moment(this.date, 'YYYY-MM-DD').format('ddd, MMM DD YYYY');
     }
   },
-  created: function(){ this.load(); },
-  updated: function(){ this.load(); }
+  created: function(){ this.load(); }
 };
 
 blog.view.components.articleList = {
@@ -117,33 +115,61 @@ blog.view.components.page = {
   template: '#page-template',
   name: 'page',
   props: ['urlid'],
-  data: function() {
-    var page = blog.content.pages[this.urlid];
-    if (!page) {
-      return {page: blog.content.notfound};
+  methods: {
+    update: function() {
+      var page = blog.content.pages[this.urlid];
+      if (!page) {
+        this.page = blog.content.notfound;
+        return;
+      }
+      this.page = page;
+      page.load();
+      return;
     }
-    return {page: page};
   },
-  components: { 'blog-article': blog.view.components.article }
+  data: function(){return {page:{}}},
+  components: { 'blog-article': blog.view.components.article },
+  watch: {
+    '$route': function (to, from) {
+      console.log(to);
+      console.log(this.urlid);
+      this.update();
+    }
+  },
+  created: function() {
+    this.update();
+  }
 }
 
 blog.view.components.post = {
   template: '#post-template',
   name: 'post',
   props: ['urldate', 'urltitle'],
-  data: function() {
-    var self = this;
-    var candidates = blog.content.posts.filter(function(e){return (e.date == self.urldate && blog.utils.strip(e.title) == self.urltitle)});
-    if (candidates.length == 0) {
-      return {post: blog.content.notfound};
+  methods: {
+    update: function() {
+      var self = this;
+      var candidates = blog.content.posts.filter(function(e){return (e.date == self.urldate && blog.utils.strip(e.title) == self.urltitle)});
+      if (candidates.length == 0) {
+        this.post = blog.content.notfound;
+        return;
+      }
+      this.post = candidates[0],
+      this.postUrl = blog.config.site + blog.config.root + '#!/posts/' + self.urldate + '/' + self.urltitle,
+      this.postId = 'post-' + self.urldate + '-' + self.urltitle;
+      return;
     }
-    return {post: candidates[0], 
+  },
+  data: function() {
+    return {post: {}, 
       name: blog.config.disqusShortname, 
-      postUrl: blog.config.site + blog.config.root + '#!/posts/' + self.urldate + '/' + self.urltitle,
-      postId: 'post-' + self.urldate + '-' + self.urltitle
+      postUrl: null,
+      postId: null
     };
   },
-  components: { 'blog-article': blog.view.components.article, 'blog-comment': blog.view.components.comment }
+  components: { 'blog-article': blog.view.components.article, 'blog-comment': blog.view.components.comment },
+  created: function() {
+    this.update();
+  }
 }
 
 

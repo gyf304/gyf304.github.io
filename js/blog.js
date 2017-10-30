@@ -52,6 +52,7 @@ var blog = {
   function initArticleLoader (article) { // lazy loading
     article.load = function() {
       var url = blog.utils.convertToAbsUrl(blog.config.dataPath, article.content);
+      console.log('Loading ' + url);
       var type = url.substring(url.lastIndexOf(".")+1);
       var parser = blog.parsers[type];
       if (typeof parser === "function") {
