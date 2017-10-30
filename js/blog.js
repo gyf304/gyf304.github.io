@@ -46,11 +46,13 @@ var blog = {
     date: '2000-00-00',
     content: "",
     html: "Oops, nothing is here...",
-    load: function() {}
+    load: function() {},
+    loaded: true
   };
 
   function initArticleLoader (article) { // lazy loading
     article.load = function() {
+      if (article.loaded) return;
       var url = blog.utils.convertToAbsUrl(blog.config.dataPath, article.content);
       console.log('Loading ' + url);
       var type = url.substring(url.lastIndexOf(".")+1);
@@ -59,6 +61,7 @@ var blog = {
         var reqUrl = url;
         return parser(reqUrl).then(function(resHtml){article.html = resHtml}).catch(function(err){console.warn(err)});
       } else {return new Promise(function(resolve, reject){reject('Not loaded')})}
+      article.loaded = true;
     };
   }
 
@@ -72,6 +75,7 @@ var blog = {
       for (var i = 0; i < placeholders.length; i++) {
         var p = placeholders[i];
         if (!p.hasOwnProperty('html')) p.html = '';
+        p.loaded = false;
         initArticleLoader(p);
       }
       placeholders.sort(function(a,b){
@@ -96,6 +100,7 @@ var blog = {
           var p = placeholders[key];
           if (!p.hasOwnProperty('html')) p.html = '';
           p.id = key.toString();
+          p.loaded = false;
           initArticleLoader(p);
         }
       }
