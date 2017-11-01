@@ -53,8 +53,7 @@ var blog = {
   function initArticleLoader (article) { // lazy loading
     article.load = function() {
       if (article.loaded) return;
-      var url = blog.utils.convertToAbsUrl(blog.config.dataPath, article.content);
-      console.log('Loading ' + url);
+      var url = article.content;
       var type = url.substring(url.lastIndexOf(".")+1);
       var parser = blog.parsers[type];
       if (typeof parser === "function") {
@@ -65,18 +64,29 @@ var blog = {
     };
   }
 
+  function preprocess (p, id) {
+    if (!p.hasOwnProperty('html')) p.html = '';
+    if (p.hasOwnProperty('content')) {
+      p.content = blog.utils.convertToAbsUrl(blog.config.dataPath, p.content);
+    }
+    if (p.img) {
+      p.img = blog.utils.convertToAbsUrl(blog.config.dataPath, p.img);
+    }
+    p.id = id;
+    p.loaded = false;
+    initArticleLoader(p);
+  }
+
   blog.loadPostsInfo = function() {
     if (blog.content.posts && blog.content.posts.length > 0) {
       return (new Promise(function(resolve, reject){resolve()}));
     }
-    return axios.get(blog.config.root + 'data/posts.json?time=' + (new Date()).getTime().toString())
+    return axios.get(blog.config.dataPath + 'posts.json?time=' + (new Date()).getTime().toString())
     .then(function (response) {
       var placeholders = response.data;
       for (var i = 0; i < placeholders.length; i++) {
         var p = placeholders[i];
-        if (!p.hasOwnProperty('html')) p.html = '';
-        p.loaded = false;
-        initArticleLoader(p);
+        preprocess(p, null);
       }
       placeholders.sort(function(a,b){
         return (new Date(a.date).getTime()) - (new Date(b.date).getTime()); 
@@ -92,16 +102,13 @@ var blog = {
     if (blog.content.pages && blog.content.pages.length > 0) {
       return (new Promise(function(resolve, reject){resolve()}));
     }
-    return axios.get(blog.config.root + 'data/pages.json?time=' + (new Date()).getTime().toString())
+    return axios.get(blog.config.dataPath + '/pages.json?time=' + (new Date()).getTime().toString())
     .then(function (response) {
       var placeholders = response.data;
       for (var key in placeholders) {
         if (placeholders.hasOwnProperty(key)) {
           var p = placeholders[key];
-          if (!p.hasOwnProperty('html')) p.html = '';
-          p.id = key.toString();
-          p.loaded = false;
-          initArticleLoader(p);
+          preprocess(p, key);
         }
       }
       blog.content.pages = placeholders;

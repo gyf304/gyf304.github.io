@@ -1,4 +1,10 @@
 {
+    "projects": {
+        "title": "Projects",
+        "date": "2017-10-31",
+        "img": "pages/projects/projects.png",
+        "content": "pages/projects/projects.md"
+    },
     "about": {
         "title": "About This Blog",
         "date": "2017-06-05",
