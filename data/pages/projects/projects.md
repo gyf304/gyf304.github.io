@@ -17,7 +17,7 @@
 
 ## Experiments / Toy Projects
 
-* [Cura in Browser](http://yifangu.com/emscripten-cura) 
+* [Cura in Browser](http://yifangu.com/cura-emscripten) 
   You may want to read about it [here](/#/posts/2017-10-30/porting-a-desktop-application-curaengine-to-browser)
   (Oct 2017)
   
