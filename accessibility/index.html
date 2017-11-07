@@ -12,12 +12,14 @@
     <div id="pages">
       <div v-for="page in pages">
         <a v-bind:href="toPageUrl(page)">{{page.title}}</a>
+        <a v-bind:href="toPageUrlHtml5(page)">(HTML5 Version)</a>
       </div>
     </div>
     <h1>Posts</h1>
     <div id="posts">
       <div v-for="post in posts">
         <a v-bind:href="toPostUrl(post)">{{post.title}}</a>
+        <a v-bind:href="toPostUrlHtml5(post)">(HTML5 Version)</a>
       </div>
     </div>
   </div>

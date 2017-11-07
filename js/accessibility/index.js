@@ -14,6 +14,12 @@ blog.loadPostsInfo()
       },
       toPageUrl: function(article){
         return 'page.html?id=' + article.id;
+      },
+      toPostUrlHtml5: function(article){
+        return blog.utils.toParamPath('/posts/' + article.date + '/' + blog.utils.strip(article.title));
+      },
+      toPageUrlHtml5: function(article){
+        return blog.utils.toParamPath('/pages/' + article.id);
       }
     }
   });
