@@ -14,7 +14,7 @@
   if (params.path) {
     try { 
       var path = decodeURIComponent(params.path);
-      location.href = location.href.slice(0, location.href.indexOf('?')) + '#' + path;
+      location.hash = '#' + path;
     } catch(e) {
       console.error(e); 
     }
