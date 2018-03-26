@@ -40,11 +40,12 @@ Website: yifangu.com | Email: yifangu@cmu.edu
 ## Toy Projects
   * ZPUSim, a simulator for ZPU, an esoteric ZISC CPU.
   * Andrew Print (In Progress), includes a pure JS PDF to PostScript Converter and a LPD Client.
+  * ezclone, a git / svn like frontend to rclone for easy file backup.
 
 # Skills
 
 ## Coding
-  Python2/3, C (POSIX/Embedded), C++, HTML5, JavaScript (ES5/ES6), CSS, Fortran95, SML, LaTeX.
+  Python2/3, C (POSIX/Embedded), C++, HTML5, JavaScript (ES5/ES6), CSS, Fortran95, SML, LaTeX, Java, Scala, Go
 
 ## Design / Multimedia
   Photoshop, Sketch, Solidworks, Autodesk Fusion 3D.
