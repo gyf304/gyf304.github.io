@@ -3,6 +3,9 @@ Website: yifangu.com | Email: yifangu@cmu.edu
 
 # Experiences & Achievements
 
+## Employment | Zensors Inc | Software Engineer (July 2018 - NOW)
+  Responsible for developing backend services for the platform. Platform is written in golang, TypeScript and Python. Deployed on AWS.
+
 ## Project | CMU | Library Occupancy Estimation (July 2017 - September 2017)
   Available at cmulib.tk
   Estimates library occupancy by analyzing Wi-Fi traffic. Deployed at Sorrells Science and Engineering Library.
